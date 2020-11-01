@@ -1,5 +1,5 @@
 {
-  "name": "dvdknaap/extensions",
+  "name": "dvdknaap/Twig-extensions",
   "description": "Common additional features for Twig that do not directly belong in core",
   "keywords": [
     "i18n",
