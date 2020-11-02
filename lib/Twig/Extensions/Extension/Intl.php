@@ -45,14 +45,15 @@ class Twig_Extensions_Extension_Intl extends AbstractExtension
 }
 
 /**
- * @param Environment $env
+ * @param Environment     $env
  * @param string|DateTime $date
- * @param string $dateFormat
- * @param string $timeFormat
- * @param null $locale
- * @param null $timezone
- * @param null $format
- * @param string $calendar
+ * @param string          $dateFormat
+ * @param string          $timeFormat
+ * @param null            $locale
+ * @param null            $timezone
+ * @param null            $format
+ * @param string          $calendar
+ *
  * @return false|string
  */
 function twig_localized_date_filter(
@@ -68,11 +69,11 @@ function twig_localized_date_filter(
     $date = twig_date_converter($env, $date, $timezone);
 
     $formatValues = [
-        'none' => IntlDateFormatter::NONE,
-        'short' => IntlDateFormatter::SHORT,
+        'none'   => IntlDateFormatter::NONE,
+        'short'  => IntlDateFormatter::SHORT,
         'medium' => IntlDateFormatter::MEDIUM,
-        'long' => IntlDateFormatter::LONG,
-        'full' => IntlDateFormatter::FULL,
+        'long'   => IntlDateFormatter::LONG,
+        'full'   => IntlDateFormatter::FULL,
     ];
 
     if (PHP_VERSION_ID < 50500 || !class_exists('IntlTimeZone')) {
@@ -102,19 +103,20 @@ function twig_localized_date_filter(
 
 /**
  * @param int|float $number
- * @param string $style
- * @param string $type
- * @param null $locale
+ * @param string    $style
+ * @param string    $type
+ * @param null      $locale
+ *
  * @return false|string
  * @throws SyntaxError
  */
 function twig_localized_number_filter($number, $style = 'decimal', $type = 'default', $locale = null)
 {
     static $typeValues = [
-        'default' => NumberFormatter::TYPE_DEFAULT,
-        'int32' => NumberFormatter::TYPE_INT32,
-        'int64' => NumberFormatter::TYPE_INT64,
-        'double' => NumberFormatter::TYPE_DOUBLE,
+        'default'  => NumberFormatter::TYPE_DEFAULT,
+        'int32'    => NumberFormatter::TYPE_INT32,
+        'int64'    => NumberFormatter::TYPE_INT64,
+        'double'   => NumberFormatter::TYPE_DOUBLE,
         'currency' => NumberFormatter::TYPE_CURRENCY,
     ];
 
@@ -129,13 +131,14 @@ function twig_localized_number_filter($number, $style = 'decimal', $type = 'defa
 }
 
 /**
- * @param float $number
+ * @param float|null  $number
  * @param string|null $currency
  * @param string|null $locale
+ *
  * @return string
  * @throws SyntaxError
  */
-function twig_localized_currency_filter(float $number, $currency = null, $locale = null)
+function twig_localized_currency_filter(?float $number, ?string $currency = null, ?string $locale = null)
 {
     $formatter = twig_get_number_formatter($locale, 'currency');
 
@@ -145,13 +148,13 @@ function twig_localized_currency_filter(float $number, $currency = null, $locale
 /**
  * Gets a number formatter instance according to given locale and formatter.
  *
- * @param string $locale Locale in which the number would be formatted
- * @param int $style Style of the formatting
+ * @param null|string $locale Locale in which the number would be formatted
+ * @param string      $style  Style of the formatting
  *
  * @return NumberFormatter A NumberFormatter instance
  * @throws SyntaxError
  */
-function twig_get_number_formatter(string$locale, int $style)
+function twig_get_number_formatter(?string $locale, string $style)
 {
     static $formatter, $currentStyle;
 
@@ -164,13 +167,13 @@ function twig_get_number_formatter(string$locale, int $style)
     }
 
     static $styleValues = [
-        'decimal' => NumberFormatter::DECIMAL,
-        'currency' => NumberFormatter::CURRENCY,
-        'percent' => NumberFormatter::PERCENT,
+        'decimal'    => NumberFormatter::DECIMAL,
+        'currency'   => NumberFormatter::CURRENCY,
+        'percent'    => NumberFormatter::PERCENT,
         'scientific' => NumberFormatter::SCIENTIFIC,
-        'spellout' => NumberFormatter::SPELLOUT,
-        'ordinal' => NumberFormatter::ORDINAL,
-        'duration' => NumberFormatter::DURATION,
+        'spellout'   => NumberFormatter::SPELLOUT,
+        'ordinal'    => NumberFormatter::ORDINAL,
+        'duration'   => NumberFormatter::DURATION,
     ];
 
     if (!isset($styleValues[$style])) {
